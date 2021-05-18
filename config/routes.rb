@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   #SIGN IN
   get("/user_sign_in", {:controller => "users", :action => "new_session_form" })
 
+  post("/verify_credentials", {:controller => "users", :action => "authenticate" })
+
+
   # Photo routes
 
   # CREATE
