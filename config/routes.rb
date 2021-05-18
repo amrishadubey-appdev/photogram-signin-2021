@@ -18,7 +18,13 @@ Rails.application.routes.draw do
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
 
   #SIGN UP
+  get("/user_sign_out", {:controller => "users", :action => "toast_cookies" })
+
+  #SIGN OUT
   get("/user_sign_up", {:controller => "users", :action => "new_registration_form" })
+
+  #SIGN IN
+  get("/user_sign_in", {:controller => "users", :action => "new_session_form" })
 
   # Photo routes
 

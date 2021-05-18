@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
+
+  def toast_cookies
+    reset_session
+
+    redirect_to("/", { :notice => "See ya later!"})
+  end
+
   def new_registration_form
 
     render({ :template => "users/sign_up_form.html.erb" })
+  end
+
+  def new_session_form
+
+    render({ :template => "users/signin_form.html.erb" })
   end
 
   def index
@@ -21,6 +33,8 @@ class UsersController < ApplicationController
     user = User.new
 
     user.username = params.fetch("input_username")
+    user.password = params.fetch("input_password")
+    user.password_confirmation = params.fetch("input_password_confirmation")
 
     user.save
 
@@ -34,9 +48,15 @@ class UsersController < ApplicationController
 
     user.username = params.fetch("input_username")
 
-    user.save
-    
-    redirect_to("/users/#{user.username}")
+    save_status = user.save
+
+    if save_status == true 
+      session.store(:user_id, user_id)
+
+    redirect_to("/users/#{user.username}", { :notice => "Welcome, " + user.username + "!"})
+    else 
+      redirect_to("/user_sign_up", { :alert => user.errors.full_messages.to_sentence})
+    end
   end
 
   def destroy
