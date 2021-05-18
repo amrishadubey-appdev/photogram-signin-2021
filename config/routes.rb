@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_user/:the_user_id", {:controller => "users", :action => "destroy"})
 
+  #SIGN UP
+  get("/user_sign_up", {:controller => "users", :action => "new_registration_form" })
+
   # Photo routes
 
   # CREATE
