@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   # CREATE
   get("/insert_comment_record", { :controller => "comments", :action => "create" })
 
-  post("/verify_credentials", {:controller => "comments", :action => "authenticate2" })
+  post("/verify_photo_credentials", {:controller => "comments", :action => "authenticate2" })
 
   # DELETE
 
