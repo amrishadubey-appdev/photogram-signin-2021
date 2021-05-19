@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
     user.username = params.fetch("input_username")
 
-    save_status = user.save
+    save_status = user.save #returns true or false if save is successful
 
     if save_status == true 
       session.store(:user_id, user_id)

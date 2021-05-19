@@ -21,6 +21,9 @@
     2 months ago
   </dd>
 
+  <% if %>
+  <% @photo.owner_id == session.fetch(:user_id) %>
+
   <dt>Edit photo</dt>
   <dd>
     <form action="/update_photo/<%= @photo.id %>">
@@ -33,6 +36,10 @@
       <button>Update photo</button>
     </form>
   </dd>
+
+  <% else %>
+  <h4> </h4>
+ <% end %> 
 
   <dt>Delete photo</dt>
   <dd>
@@ -69,13 +76,19 @@
   <% end %>
 </table>
 
-<h3>Add a new comment</h3>
+<% if %>
+  <% @photo.owner_id == session.fetch(:user_id) %>
 
-<form action="/insert_comment_record" method="post">
-  <input id="browser_photo_id" type="hidden" value="<%= @photo.id %>" name="input_photo_id">
+  <h3>Add a new comment</h3>
 
-  <label for="browser_comment">Comment</label>
-  <textarea id="browser_comment" name="input_body" placeholder="Enter a comment..."></textarea>
+  <form action="/insert_comment_record" method="post">
+    <input id="browser_photo_id" type="hidden" value="<%= @photo.id %>" name="input_photo_id">
 
-  <button>Add comment</button>
-</form>
+    <label for="browser_comment">Comment</label>
+    <textarea id="browser_comment" name="input_body" placeholder="Enter a comment..."></textarea>
+
+    <button>Add comment</button>
+  </form>
+  <% else %>
+  <h4>Login to continue</h4>
+ <% end %> 
